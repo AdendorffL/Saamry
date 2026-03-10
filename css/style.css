@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg:          #0f0f0f;
+  --surface:     #1a1a1a;
+  --surface2:    #242424;
+  --border:      #2e2e2e;
+  --text:        #f0f0f0;
+  --text-muted:  #666;
+  --accent:      #e8ff47;
+  --danger:      #ff4f4f;
+  --success:     #4fd98e;
+  --radius:      14px;
+  --font:        'DM Sans', sans-serif;
+  --mono:        'DM Mono', monospace;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 16px;
+  overscroll-behavior: none;
+}
+
+/* Layout */
+#app {
+  max-width: 430px;
+  margin: 0 auto;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+.screen {
+  /* Screens are hidden by default, and shown when active */
+  /* display: none; commented until app.js is functional */
+  flex-direction: column;
+  flex: 1;
+  padding: 10px 20px 40px;
+  animation: fadeUp 0.2s ease;
+  overflow-y: auto;
+}
+.screen.active {
+  display: flex;
+}
+
+@keyframes fade3Up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0px);}
+}
+
+/* ===== Topbar ===== */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 0 24px;
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 10;
+}
+
+.topbar-title {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.icon-btn {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 16px;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+
+.icon-btn:active { background: var(--surface2); }
+
