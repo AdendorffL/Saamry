@@ -23,15 +23,16 @@
             <p>who are you?</p>
         </div>
 
+        <!-- User Buttons and Password -->
         <div id="user-buttons" class="user-buttons"></div>
 
         <div class="password-row">
             <input id="password-input" class="input" type="password" placeholder="Password" autocomplete="current-password" />
             <button id="login-btn" class="login-btn">Go →</button>
         </div>
-
+        
+        <!-- Error Message -->
         <div id="login-error" class="login-error"></div>
-
     </section>
 
     <!-- == MAIN SCREEN == -->
@@ -39,25 +40,32 @@
         <div class="topbar">
             <span class="topbar-title">Entry</span>
             <div style="display:flex; gap:8px">
+                <!-- Charts and Logout Buttons -->
                 <button id="charts-btn" class="icon-btn" title="View history">📊</button>
                 <button id="logout-btn" class="icon-btn" title="Log out">↩</button>
             </div>
         </div>
 
+        <!-- Greeting with Dynamic Date and Time of Day -->
         <div id="greeting" class="greeting"></div>
         <div id="date-label" class="date-label"></div>
 
+        <!-- Ticket Amount -->
         <div class="amount-card">
-            <div class="amount-label">Amount</div>
-            <input id="amount-input" class="amount-input" type="number" inputmode="decimal" placeholder="0" />
+            <div class="amount-label">Ticket Amount (R)</div>
+            <input id="amount-input" class="amount-input" type="number" inputmode="decimal" placeholder="0" min="0" />
         </div>
 
+        <!-- Optional Note -->
         <input id="note-input" class="input note-input" type="text" placeholder="Note (optional)" maxlength="100"/>
 
-        <div class="amount-label" style="margin-bottom: 10px">Applies to</div>
+        <!-- Passengers in the car today -->
+        <div class="amount-label" style="margin-bottom:10px">Who rode today?</div>
         <div id="checkbox-list" class="checkbox-card"></div>
-
+        <!-- Submit Button -->
         <button id="submit-btn" class="submit-btn">Save Entry</button>
+
+
     </section>
 
     <!-- == CHARTS SCREEN == -->
