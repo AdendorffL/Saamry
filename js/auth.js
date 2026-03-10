@@ -15,6 +15,7 @@ async function initAuth() {
   return null;
 }
 
+// Called from login screen - creates a new session
 async function login(email, password) {
   const { data, error } = await db.auth.signinWithPassword({ email, password });
   if (error) throw error;
@@ -23,6 +24,7 @@ async function login(email, password) {
   return currentUser;
 }
 
+// Called from main screen - destroys the session
 async function logout() {
   await db.auth.signOut();
   currentUser = null;
