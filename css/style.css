@@ -1,16 +1,80 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap');
 
 :root {
-  --bg:          #0f0f0f;
-  --surface:     #1a1a1a;
-  --surface2:    #242424;
-  --border:      #2e2e2e;
-  --text:        #f0f0f0;
-  --text-muted:  #666;
-  --accent:      #e8ff47;
-  --danger:      #ff4f4f;
-  --success:     #4fd98e;
+  --bg:          #f5f2df;   /* lighter background */
+  --surface:     #e8e2c5;   /* original cream */
+  --surface2:    #d9d2ad;   /* darker panel layer */
+  --border:      #bdb58f;
+
+  --text:        #262910;   /* deeper olive for stronger contrast */
+  --text-muted:  #5e6242;
+
+  --primary:     #4f65a3;   /* refined #5167A2 */
+  --accent:      #c65f24;   /* stronger #C46428 */
+  --success:     #596233;   /* darker #60693A */
+  --danger:      #b64632;   /* added red tone */
+
   --radius:      14px;
+
+  --font:        'DM Sans', sans-serif;
+  --mono:        'DM Mono', monospace;
+}
+
+:root {
+  --bg:          #fbf8ef;   /* lighter cream background */
+  --surface:     #f6f2e6;   /* main panels */
+  --surface2:    #ebe5d2;   /* secondary panels */
+  --border:      #d8d2be;
+
+  --text:        #243018;   /* dark green */
+  --text-muted:  #667356;
+
+  --primary:     #6a8fd6;   /* Morning Glory */
+  --success:     #5f8f4e;   /* Green Leaves */
+  --accent:      #e57a2f;   /* Tangerine */
+
+  --radius:      14px;
+
+  --font:        'DM Sans', sans-serif;
+  --mono:        'DM Mono', monospace;
+}
+
+:root {
+  --bg:          #f3f6f2;   /* Spring (very light) */
+  --surface:     #e6ede3;   /* Sage */
+  --surface2:    #d7e1d3;
+  --border:      #c3d0c0;
+
+  --text:        #2e3b2a;   /* Moss */
+  --text-muted:  #6c7b68;
+
+  --primary:     #6f9a6a;   /* Moss/Sage mix */
+  --accent:      #c97aa8;   /* Blushing Lilac */
+  --danger:      #d85f73;   /* Wild Rose */
+  --success:     #7dbb7a;   /* Spring green */
+
+  --radius:      14px;
+
+  --font:        'DM Sans', sans-serif;
+  --mono:        'DM Mono', monospace;
+}
+
+:root {
+  --bg:          #f4f6fb;   /* Cloud */
+  --surface:     #e7ebf6;
+  --surface2:    #d8def0;
+  --border:      #c3c9de;
+
+  --text:        #1f2a44;   /* Navy */
+  --text-muted:  #616b86;
+
+  --primary:     #6f86d6;   /* Periwinkle */
+  --accent:      #f3a47a;   /* Peach */
+  --danger:      #8f3b4d;   /* Maroon */
+  --success:     #4f7c6d;   /* cool complementary green */
+
+  --radius:      14px;
+
   --font:        'DM Sans', sans-serif;
   --mono:        'DM Mono', monospace;
 }
