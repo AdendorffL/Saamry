@@ -1,10 +1,14 @@
+// ============================================
+// auth.js — Login / logout / session + profile
+// ============================================
+
 const { createClient } = supabase;
 const db = createClient(CONFIG.SUPABASE_URL, CONFIG.SUPABASE_ANON_KEY);
 
-let currentUser = null;
+let currentUser    = null;
 let currentProfile = null; // row from profiles table
 
-// Called on app boot - restores existing session
+// Called on app boot — restores existing session
 async function initAuth() {
   const { data: { session } } = await db.auth.getSession();
   if (session) {
@@ -15,25 +19,17 @@ async function initAuth() {
   return null;
 }
 
-// Called from login screen - creates a new session
 async function login(email, password) {
-  const { data, error } = await db.auth.signinWithPassword({ email, password });
+  const { data, error } = await db.auth.signInWithPassword({ email, password });
   if (error) throw error;
   currentUser = data.user;
   await _loadProfile();
   return currentUser;
 }
 
-// Called from main screen - destroys the session
 async function logout() {
   await db.auth.signOut();
-  currentUser = null;
-  currentProfile = null;
-}
-
-async function logout() {
-  await db.auth.signOut();
-  currentUser = null;
+  currentUser    = null;
   currentProfile = null;
 }
 
@@ -49,7 +45,7 @@ async function _loadProfile() {
   currentProfile = data;
 }
 
-function getCurrentUser() { return currentUser; }
+function getCurrentUser()    { return currentUser; }
 function getCurrentProfile() { return currentProfile; }
 
 // Helper: get the CONFIG.USERS entry (for color only)
