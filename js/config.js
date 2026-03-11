@@ -4,8 +4,8 @@ const CONFIG = {
 
   // ===== User Config =====
   USERS: [
-    { name: 'Annelize', email: 'ottoannelize05@gmail.com', color: '#4f8ef7' },
-    { name: 'Tenisha',   email: 'tenisha.swanepoel@gmail.com', color: '#f7704f' },
+    { name: 'Annelize', email: 'ottoannelize05@gmail.com', color: '#f74f4f' },
+    { name: 'Tenisha',   email: 'tenisha.swanepoel@gmail.com', color: '#9d4ff7' },
     { name: 'Kelsy', email: 'ferreirakelsy11@gmail.com', color: '#4fd98e' },
   ] 
 };
