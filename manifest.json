@@ -1,8 +1,8 @@
 {
   "name": "Saamry",
   "description": "A carpooling app to avoid being the only one to overpay for parking.",
-  "scope": "/",
-  "start_url": "/",
+  "scope": "https://saamry.netlify.app/",
+  "start_url": "https://saamry.netlify.app/",
   "display": "standalone",
   "background_color": "#0f0f0f",
   "theme_color": "#0f0f0f",
