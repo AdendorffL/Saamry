@@ -344,7 +344,7 @@ function renderTripHistory(trips) {
   });
 }
 
-// ── Boot ────────────────────────────────────
+// ===== Boot =====
 window.addEventListener('DOMContentLoaded', async () => {
   initLoginScreen();
 

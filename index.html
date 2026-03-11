@@ -70,18 +70,54 @@
 
     <!-- == CHARTS SCREEN == -->
     <section id="charts-screen" class="screen">
-        <div class="topbar">
-            <button id="back-btn" class="icon-btn" title="Back">←</button>
-            <span id="charts-title" class="topbar-title"></span>
-            <div style="width:40px"></div>
-        </div>
-    </section>
+    <div class="topbar">
+      <button id="back-btn" class="icon-btn" title="Back">←</button>
+      <span id="charts-month" class="topbar-title"></span>
+      <div style="width:40px"></div>
+    </div>
+
+    <!-- Summary stats -->
+    <div class="stats-grid">
+      <div class="stat-card" style="grid-column:1/-1">
+        <div class="stat-label">Total Spent This Month</div>
+        <div id="stat-total" class="stat-value">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Trips</div>
+        <div id="stat-trips" class="stat-value">—</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Avg per Trip</div>
+        <div id="stat-avg" class="stat-value">—</div>
+      </div>
+    </div>
+
+    <!-- Who paid what -->
+    <div class="section-label">Paid by person</div>
+    <div id="paid-breakdown" class="breakdown-card"></div>
+
+    <!-- Settlement -->
+    <div class="section-label" style="margin-top:24px">Settlement</div>
+    <div class="section-hint">What needs to change hands to even out</div>
+    <div id="settlement" class="settlement-card"></div>
+
+    <!-- Bar chart -->
+    <div class="section-label" style="margin-top:24px">Daily spend</div>
+    <div class="bar-chart">
+      <div id="bars" class="bars"></div>
+    </div>
+
+    <!-- Trip history -->
+    <div class="section-label">Trip log</div>
+    <div id="history-list" class="history-list"></div>
+  </section>
+
 </div>
 
 <div id="toast" class="toast"></div>
 
 <!-- Supabase SDK-->
-<script src="https://cdn.jsdelivr.net/npm/@supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 
  <!-- App Scripts -->
 <script src="js/config.js"></script>
@@ -91,7 +127,7 @@
 
 <!-- Service Worker Registration -->
  <script>
-    if ('serviceWorker' in navigator) {
+    if ('serviceWorker' in navigator && location.hostname !== 'localhost') {
         navigator.serviceWorker.register('/sw.js').catch(console.error);
     }
  </script>
