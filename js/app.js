@@ -2,13 +2,13 @@
 // app.js — Screen routing + UI logic
 // ============================================
 
-// ===== Screen router =====
+// ── Screen router ──────────────────────────
 function showScreen(id) {
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
 
-// ===== Toast =====
+// ── Toast ──────────────────────────────────
 function showToast(msg) {
   const t = document.getElementById('toast');
   t.textContent = msg;
@@ -16,7 +16,7 @@ function showToast(msg) {
   setTimeout(() => t.classList.remove('show'), 2200);
 }
 
-// ===== Helper =====
+// ── Helpers ────────────────────────────────
 function formatRand(n) {
   return 'R ' + Number(n).toLocaleString('en-ZA', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 }
@@ -25,8 +25,9 @@ function currentMonthLabel() {
   return new Date().toLocaleDateString('en-ZA', { month: 'long', year: 'numeric' });
 }
 
-// ===== Login screen =====
+// ── Login screen ───────────────────────────
 let selectedLoginUser = null;
+let isSubmitting      = false; // submission lock — prevents double inserts
 
 function initLoginScreen() {
   const container = document.getElementById('user-buttons');
@@ -49,7 +50,7 @@ function initLoginScreen() {
   });
 }
 
-// ===== Main screen =====
+// ── Main screen ────────────────────────────
 let allProfiles = [];
 
 // Only updates dynamic content — never registers buttons
@@ -100,6 +101,10 @@ function renderPassengerCheckboxes(driverProfileId) {
 }
 
 async function handleSubmit() {
+  // Lock — if already running, ignore any duplicate calls entirely
+  if (isSubmitting) return;
+  isSubmitting = true;
+
   const amountInput = document.getElementById('amount-input');
   const noteInput   = document.getElementById('note-input');
   const btn         = document.getElementById('submit-btn');
@@ -107,6 +112,7 @@ async function handleSubmit() {
   const amount = parseFloat(amountInput.value);
   if (!amount || isNaN(amount) || amount <= 0) {
     showToast('Enter a valid ticket amount');
+    isSubmitting = false;
     return;
   }
 
@@ -131,10 +137,11 @@ async function handleSubmit() {
   } finally {
     btn.disabled    = false;
     btn.textContent = 'Save Trip';
+    isSubmitting    = false; // always release the lock
   }
 }
 
-// ===== Charts screen =====
+// ── Charts screen ───────────────────────────
 async function initChartsScreen() {
   const now   = new Date();
   const year  = now.getFullYear();
@@ -310,7 +317,7 @@ function renderTripHistory(trips) {
   });
 }
 
-// ===== App init =====
+// ── Boot — all button wiring happens ONCE here ──
 window.addEventListener('DOMContentLoaded', async () => {
 
   initLoginScreen();
@@ -333,8 +340,11 @@ window.addEventListener('DOMContentLoaded', async () => {
     }
   };
 
-  // Submit button — wired once
-  document.getElementById('submit-btn').onclick = handleSubmit;
+  // Submit button — strip any existing listeners by replacing the node, then wire once
+  const oldBtn  = document.getElementById('submit-btn');
+  const freshBtn = oldBtn.cloneNode(true);
+  oldBtn.parentNode.replaceChild(freshBtn, oldBtn);
+  freshBtn.onclick = handleSubmit;
 
   // Charts button — wired once
   document.getElementById('charts-btn').onclick = async () => {
