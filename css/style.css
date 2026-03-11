@@ -42,7 +42,7 @@ html, body {
 
 .screen {
   /* Screens are hidden by default, and shown when active */
-  /* display: none; commented until app.js is functional */
+  display: none;
   flex-direction: column;
   flex: 1;
   padding: 10px 20px 40px;
