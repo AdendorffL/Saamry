@@ -109,9 +109,16 @@ async function handleSubmit() {
   const noteInput   = document.getElementById('note-input');
   const btn         = document.getElementById('submit-btn');
 
-  const amount = parseFloat(amountInput.value);
-  if (!amount || isNaN(amount) || amount <= 0) {
-    showToast('Enter a valid ticket amount');
+  // Allow 0 for free parking days — only reject if field is completely empty
+  const rawValue = amountInput.value.trim();
+  const amount   = rawValue === '' ? null : parseFloat(rawValue);
+  if (rawValue === '') {
+    showToast('Enter an amount — use 0 for a free day');
+    isSubmitting = false;
+    return;
+  }
+  if (isNaN(amount)) {
+    showToast('Enter a valid number');
     isSubmitting = false;
     return;
   }
@@ -161,11 +168,12 @@ async function initChartsScreen() {
   }
 }
 
-function renderSummaryStats({ totalPaid, tripCount, avgPerTrip, paidByPerson }) {
+function renderSummaryStats({ totalPaid, tripCount, avgPerTrip, paidByPerson, driveCount }) {
   document.getElementById('stat-total').textContent = formatRand(totalPaid);
   document.getElementById('stat-trips').textContent = tripCount;
   document.getElementById('stat-avg').textContent   = formatRand(avgPerTrip);
 
+  // Paid by person
   const breakdown = document.getElementById('paid-breakdown');
   breakdown.innerHTML = '';
 
@@ -188,6 +196,43 @@ function renderSummaryStats({ totalPaid, tripCount, avgPerTrip, paidByPerson }) 
     row.appendChild(nameEl);
     row.appendChild(amountEl);
     breakdown.appendChild(row);
+  });
+
+  // Drive counts
+  const driveList = document.getElementById('drive-breakdown');
+  driveList.innerHTML = '';
+
+  const total = Object.values(driveCount).reduce((s, n) => s + n, 0);
+
+  Object.entries(driveCount).forEach(([name, count]) => {
+    const row = document.createElement('div');
+    row.className = 'breakdown-row';
+
+    const dot = document.createElement('span');
+    dot.className        = 'dot';
+    dot.style.background = getColorForName(name);
+
+    const nameEl = document.createElement('span');
+    nameEl.textContent = name;
+
+    const right = document.createElement('div');
+    right.style.cssText = 'margin-left:auto;text-align:right';
+
+    const countEl = document.createElement('span');
+    countEl.className   = 'breakdown-amount';
+    countEl.textContent = count + (count === 1 ? ' drive' : ' drives');
+
+    const pctEl = document.createElement('div');
+    pctEl.style.cssText  = 'font-size:11px;color:var(--text-muted);margin-top:2px';
+    pctEl.textContent    = total > 0 ? Math.round((count / total) * 100) + '% of trips' : '—';
+
+    right.appendChild(countEl);
+    right.appendChild(pctEl);
+
+    row.appendChild(dot);
+    row.appendChild(nameEl);
+    row.appendChild(right);
+    driveList.appendChild(row);
   });
 }
 

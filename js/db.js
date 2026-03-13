@@ -2,7 +2,7 @@
 // db.js — All database operations
 // ============================================
 
-// ===== Profiles =====
+// ── Profiles ───────────────────────────────
 
 async function getAllProfiles() {
   const { data, error } = await db
@@ -13,7 +13,7 @@ async function getAllProfiles() {
   return data; // [{ id, name }, ...]
 }
 
-// ===== Trips =====
+// ── Trips ──────────────────────────────────
 
 // Log a new trip (payer + riders)
 // riderIds: array of profile.id for everyone in the car INCLUDING the driver
@@ -27,7 +27,7 @@ async function addTrip(amount, note, riderIds) {
     .insert({
       date:     new Date().toISOString().split('T')[0], // today YYYY-MM-DD
       paid_by:  user.id,
-      amount:   Number(amount),
+      amount:   amount === null ? 0 : Number(amount),
       note:     note || null,
     })
     .select()
@@ -73,7 +73,7 @@ async function getTripsForMonth(year, month) {
   return trips;
 }
 
-// ===== Settlement calculation =====
+// ── Settlement calculation ──────────────────
 // Takes the trips array from getTripsForMonth()
 // Returns: { balances: { name: netAmount }, payments: [...] }
 // Positive balance = is owed money, Negative = owes money
@@ -129,7 +129,7 @@ function calculateSettlement(trips, allProfiles) {
   return { namedBalance, payments };
 }
 
-// ===== Stats for charts screen =====
+// ── Stats for charts screen ─────────────────
 async function getStatsForMonth(year, month) {
   const trips      = await getTripsForMonth(year, month);
   const allProfiles = await getAllProfiles();
@@ -144,6 +144,14 @@ async function getStatsForMonth(year, month) {
   trips.forEach(t => {
     const name = t.profiles?.name;
     if (name) paidByPerson[name] = (paidByPerson[name] || 0) + Number(t.amount);
+  });
+
+  // Per-person drive count (how many times each person was the driver)
+  const driveCount = {};
+  allProfiles.forEach(p => { driveCount[p.name] = 0; });
+  trips.forEach(t => {
+    const name = t.profiles?.name;
+    if (name) driveCount[name] = (driveCount[name] || 0) + 1;
   });
 
   // Daily totals for bar chart (last 14 days of data)
@@ -161,6 +169,7 @@ async function getStatsForMonth(year, month) {
     tripCount,
     avgPerTrip,
     paidByPerson,
+    driveCount,
     chartData,
     namedBalance,
     payments,

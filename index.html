@@ -54,7 +54,7 @@
         <!-- Ticket Amount -->
         <div class="amount-card">
             <div class="amount-label">Ticket Amount (R)</div>
-            <input id="amount-input" class="amount-input" type="number" inputmode="decimal" placeholder="0" min="0" />
+            <input id="amount-input" class="amount-input" type="number" inputmode="decimal" placeholder="0.00" />
         </div>
 
         <!-- Optional Note -->
@@ -97,6 +97,11 @@
     <div class="section-label">Paid by person</div>
     <div id="paid-breakdown" class="breakdown-card"></div>
 
+    <!-- Drive counts -->
+    <div class="section-label" style="margin-top:24px">Drives this month</div>
+    <div class="section-hint">Who drove how many times</div>
+    <div id="drive-breakdown" class="breakdown-card"></div>
+
     <!-- Settlement -->
     <div class="section-label" style="margin-top:24px">Settlement</div>
     <div class="section-hint">What needs to change hands to even out</div>
@@ -123,7 +128,7 @@
  <!-- App Scripts -->
 <script src="js/config.js"></script>
 <script src="js/auth.js"></script>
-<script src="js/db..js"></script>
+<script src="js/db.js"></script>
 <script src="js/app.js"></script>
 
 <!-- Service Worker Registration -->
