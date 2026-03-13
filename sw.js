@@ -1,10 +1,11 @@
 // sw.js - Service Worker for PWA install + offline shell
-const CACHE = 'saamry-v1.0.2';
+const CACHE = 'saamry-v1.1.0';
 const SHELL = [
   '/',
   '/index.html',
   '/css/style.css',
   '/js/config.js',
+  '/js/db.js',
   '/js/auth.js',
   '/js/app.js',
   '/manifest.json',
@@ -34,7 +35,7 @@ self.addEventListener('fetch', e => {
 
   // Always go to network for Supabase API calls
   if (url.hostname.includes('supabase.co')) {
-    e.repondWith(fetch(e.request));
+    e.respondWith(fetch(e.request));
     return;
   }
 

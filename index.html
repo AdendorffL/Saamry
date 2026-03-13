@@ -54,11 +54,17 @@
         <!-- Ticket Amount -->
         <div class="amount-card">
             <div class="amount-label">Ticket Amount (R)</div>
-            <input id="amount-input" class="amount-input" type="number" inputmode="decimal" placeholder="0" min="0" />
+            <input id="amount-input" class="amount-input" type="number" inputmode="decimal" placeholder="0.00" />
         </div>
 
         <!-- Optional Note -->
         <input id="note-input" class="input note-input" type="text" placeholder="Note (optional)" maxlength="100"/>
+
+        <!-- Date — defaults to today, editable for missed entries -->
+        <div class="date-row">
+          <div class="amount-label" style="margin-bottom:0">Date</div>
+          <input id="date-input" class="date-input" type="date" />
+        </div>
 
         <!-- Passengers in the car today -->
         <div class="amount-label" style="margin-bottom:10px">Who rode today?</div>
@@ -73,14 +79,23 @@
     <section id="charts-screen" class="screen">
     <div class="topbar">
       <button id="back-btn" class="icon-btn" title="Back">←</button>
-      <span id="charts-month" class="topbar-title"></span>
-      <div style="width:40px"></div>
+      <span class="topbar-title">Current Period</span>
+      <button id="history-btn" class="icon-btn" title="Settlement history">🗓</button>
+    </div>
+
+    <!-- Pending settlement banner — shown when a settlement is awaiting confirmations -->
+    <div id="pending-banner" class="pending-banner" style="display:none">
+      <div id="pending-banner-text" class="pending-banner-text"></div>
+      <div class="pending-banner-actions">
+        <button id="pending-confirm-btn" class="pending-confirm-btn">Confirm</button>
+        <button id="pending-cancel-btn" class="pending-cancel-btn">Cancel</button>
+      </div>
     </div>
 
     <!-- Summary stats -->
     <div class="stats-grid">
       <div class="stat-card" style="grid-column:1/-1">
-        <div class="stat-label">Total Spent This Month</div>
+        <div class="stat-label">Total Spent This Period</div>
         <div id="stat-total" class="stat-value">—</div>
       </div>
       <div class="stat-card">
@@ -94,13 +109,22 @@
     </div>
 
     <!-- Who paid what -->
-    <div class="section-label">Paid by person</div>
-    <div id="paid-breakdown" class="breakdown-card"></div>
+    <div id="paid-section">
+      <div class="section-label">Paid by person</div>
+      <div id="paid-breakdown" class="breakdown-card"></div>
+    </div>
+
+    <!-- Drive counts -->
+    <div class="section-label" style="margin-top:24px">Drives</div>
+    <div class="section-hint">Since last reset</div>
+    <div id="drive-breakdown" class="breakdown-card"></div>
 
     <!-- Settlement -->
-    <div class="section-label" style="margin-top:24px">Settlement</div>
-    <div class="section-hint">What needs to change hands to even out</div>
-    <div id="settlement" class="settlement-card"></div>
+    <div id="settlement-section" style="margin-top:24px">
+      <div class="section-label">Settlement</div>
+      <div class="section-hint">What needs to change hands to even out</div>
+      <div id="settlement" class="settlement-card"></div>
+    </div>
 
     <!-- Bar chart -->
     <div class="section-label" style="margin-top:24px">Daily spend</div>
@@ -108,12 +132,59 @@
       <div id="bars" class="bars"></div>
     </div>
 
+    <!-- Settle Up button -->
+    <button id="settle-btn" class="settle-up-btn">💸 Settle Up</button>
+
     <!-- Trip history -->
     <div class="section-label">Trip log</div>
     <div id="history-list" class="history-list"></div>
   </section>
 
 </div>
+
+  <!-- ══════════════════════════════════════
+       SETTLE UP ACTION SHEET
+  ══════════════════════════════════════ -->
+  <div id="settle-modal" class="modal-overlay">
+    <div class="modal-sheet">
+      <div class="modal-header">
+        <span class="modal-title">Settle Up</span>
+        <button id="settle-close-btn" class="icon-btn">✕</button>
+      </div>
+      <div class="settle-action-body">
+        <p class="settle-action-hint">Choose what to reset. All 3 members must confirm a money settlement before it takes effect.</p>
+        <button id="settle-money-btn" class="settle-action-btn">
+          <span class="settle-action-icon">💰</span>
+          <div>
+            <div class="settle-action-title">Settle Money</div>
+            <div class="settle-action-sub">Resets debt to zero · Saves a snapshot · Requires all 3 to confirm</div>
+          </div>
+        </button>
+        <button id="reset-drives-btn" class="settle-action-btn">
+          <span class="settle-action-icon">🔄</span>
+          <div>
+            <div class="settle-action-title">Reset Drives</div>
+            <div class="settle-action-sub">Resets drive counts to zero · No confirmation needed</div>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════
+       HISTORY MODAL
+  ══════════════════════════════════════ -->
+  <div id="history-modal" class="modal-overlay">
+    <div class="modal-sheet">
+      <div class="modal-header">
+        <span class="modal-title">Settlement History</span>
+        <button id="history-close-btn" class="icon-btn">✕</button>
+      </div>
+      <div id="history-modal-body" class="modal-body">
+        <p class="empty-state">Loading…</p>
+      </div>
+    </div>
+  </div>
 
 <div id="toast" class="toast"></div>
 
@@ -123,7 +194,7 @@
  <!-- App Scripts -->
 <script src="js/config.js"></script>
 <script src="js/auth.js"></script>
-<script src="js/db..js"></script>
+<script src="js/db.js"></script>
 <script src="js/app.js"></script>
 
 <!-- Service Worker Registration -->
