@@ -1,5 +1,5 @@
 // sw.js - Service Worker for PWA install + offline shell
-const CACHE = 'saamry-v1.0.2';
+const CACHE = 'saamry-v1.1.0';
 const SHELL = [
   '/',
   '/index.html',
