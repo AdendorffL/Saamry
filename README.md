@@ -1,4 +1,5 @@
 # Saamry
+![Image of Login Page](images/screenshots/login.png)
 
 A private PWA for small carpool groups to track daily parking ticket costs and settle up fairly — without spreadsheets or mental math.
 
