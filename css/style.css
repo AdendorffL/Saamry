@@ -1,65 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap');
 
 :root {
-  --bg:          #f5f2df;   /* lighter background */
-  --surface:     #e8e2c5;   /* original cream */
-  --surface2:    #d9d2ad;   /* darker panel layer */
-  --border:      #bdb58f;
-
-  --text:        #262910;   /* deeper olive for stronger contrast */
-  --text-muted:  #5e6242;
-
-  --primary:     #4f65a3;   /* refined #5167A2 */
-  --accent:      #c65f24;   /* stronger #C46428 */
-  --success:     #596233;   /* darker #60693A */
-  --danger:      #b64632;   /* added red tone */
-
-  --radius:      14px;
-
-  --font:        'DM Sans', sans-serif;
-  --mono:        'DM Mono', monospace;
-}
-
-:root {
-  --bg:          #fbf8ef;   /* lighter cream background */
-  --surface:     #f6f2e6;   /* main panels */
-  --surface2:    #ebe5d2;   /* secondary panels */
-  --border:      #d8d2be;
-
-  --text:        #243018;   /* dark green */
-  --text-muted:  #667356;
-
-  --primary:     #6a8fd6;   /* Morning Glory */
-  --success:     #5f8f4e;   /* Green Leaves */
-  --accent:      #e57a2f;   /* Tangerine */
-
-  --radius:      14px;
-
-  --font:        'DM Sans', sans-serif;
-  --mono:        'DM Mono', monospace;
-}
-
-:root {
-  --bg:          #f3f6f2;   /* Spring (very light) */
-  --surface:     #e6ede3;   /* Sage */
-  --surface2:    #d7e1d3;
-  --border:      #c3d0c0;
-
-  --text:        #2e3b2a;   /* Moss */
-  --text-muted:  #6c7b68;
-
-  --primary:     #6f9a6a;   /* Moss/Sage mix */
-  --accent:      #c97aa8;   /* Blushing Lilac */
-  --danger:      #d85f73;   /* Wild Rose */
-  --success:     #7dbb7a;   /* Spring green */
-
-  --radius:      14px;
-
-  --font:        'DM Sans', sans-serif;
-  --mono:        'DM Mono', monospace;
-}
-
-:root {
   --bg:          #f4f6fb;   /* Cloud */
   --surface:     #e7ebf6;
   --surface2:    #d8def0;
@@ -79,13 +20,8 @@
   --mono:        'DM Mono', monospace;
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  -webkit-tap-highlight-color: transparent;
-}
-
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+ 
 html, body {
   height: 100%;
   background: var(--bg);
@@ -94,8 +30,8 @@ html, body {
   font-size: 16px;
   overscroll-behavior: none;
 }
-
-/* Layout */
+ 
+/* ── Layout ── */
 #app {
   max-width: 430px;
   margin: 0 auto;
@@ -103,27 +39,23 @@ html, body {
   display: flex;
   flex-direction: column;
 }
-
+ 
 .screen {
-  /* Screens are hidden by default, and shown when active */
   display: none;
   flex-direction: column;
   flex: 1;
-  padding: 10px 20px 40px;
+  padding: 0 20px 40px;
   animation: fadeUp 0.2s ease;
   overflow-y: auto;
 }
-
-.screen.active {
-  display: flex;
-}
-
-@keyframes fade3Up {
+.screen.active { display: flex; }
+ 
+@keyframes fadeUp {
   from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0px);}
+  to   { opacity: 1; transform: translateY(0); }
 }
-
-/* ===== Topbar ===== */
+ 
+/* ── Top Bar ── */
 .topbar {
   display: flex;
   align-items: center;
@@ -134,7 +66,7 @@ html, body {
   background: var(--bg);
   z-index: 10;
 }
-
+ 
 .topbar-title {
   font-size: 13px;
   font-weight: 500;
@@ -142,11 +74,12 @@ html, body {
   text-transform: uppercase;
   color: var(--text-muted);
 }
-
+ 
 .icon-btn {
   width: 40px; height: 40px;
   border-radius: 50%;
   background: var(--surface);
+  border: 1px solid var(--border);
   color: var(--text);
   font-size: 16px;
   cursor: pointer;
@@ -155,21 +88,22 @@ html, body {
   transition: background 0.15s;
   flex-shrink: 0;
 }
-
 .icon-btn:active { background: var(--surface2); }
-
-/* ===== Login Screen ===== */
-#login-screen { justify-content: center; }
-
+ 
+/* ── LOGIN SCREEN ── */
+#login-screen {
+  justify-content: center;
+}
+ 
 .login-logo {
   font-family: var(--mono);
   font-size: 11px;
   letter-spacing: 0.15em;
   color: var(--text-muted);
+  text-transform: uppercase;
   text-align: center;
   margin-bottom: 64px;
 }
-
 .login-logo span {
   display: block;
   font-size: 36px;
@@ -179,13 +113,13 @@ html, body {
   color: var(--text);
   margin-bottom: 6px;
 }
-
+ 
 .user-buttons {
   display: flex;
   gap: 10px;
   margin-bottom: 20px;
 }
-
+ 
 .user-btn {
   flex: 1;
   padding: 14px 8px;
@@ -205,13 +139,13 @@ html, body {
   background: var(--surface2);
   color: var(--accent);
 }
-
+ 
 .password-row {
   display: flex;
   gap: 10px;
   align-items: center;
 }
-
+ 
 .input {
   width: 100%;
   padding: 15px 16px;
@@ -226,7 +160,7 @@ html, body {
 }
 .input:focus { border-color: var(--accent); }
 .input::placeholder { color: var(--text-muted); }
-
+ 
 .login-btn {
   padding: 15px 20px;
   background: var(--accent);
@@ -241,7 +175,7 @@ html, body {
   transition: opacity 0.15s;
 }
 .login-btn:active { opacity: 0.8; }
-
+ 
 .login-error {
   font-size: 13px;
   color: var(--danger);
@@ -249,7 +183,7 @@ html, body {
   min-height: 20px;
   margin-top: 12px;
 }
-
+ 
 /* ── MAIN SCREEN ── */
 .greeting {
   font-size: 26px;
@@ -258,13 +192,13 @@ html, body {
   margin-bottom: 6px;
 }
 .greeting span { color: var(--accent); }
-
+ 
 .date-label {
   font-size: 13px;
   color: var(--text-muted);
   margin-bottom: 28px;
 }
-
+ 
 .amount-card {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -272,7 +206,7 @@ html, body {
   padding: 20px;
   margin-bottom: 16px;
 }
-
+ 
 .amount-label {
   font-size: 11px;
   letter-spacing: 0.1em;
@@ -280,7 +214,7 @@ html, body {
   color: var(--text-muted);
   margin-bottom: 10px;
 }
-
+ 
 .amount-input {
   width: 100%;
   background: none;
@@ -293,16 +227,16 @@ html, body {
   letter-spacing: -0.02em;
 }
 .amount-input::placeholder { color: var(--border); }
-
+ 
 .note-input { margin-bottom: 28px; }
-
+ 
 .passengers-hint {
   font-size: 12px;
   color: var(--text-muted);
   margin-bottom: 10px;
   margin-top: -6px;
 }
-
+ 
 /* Checkbox card */
 .checkbox-card {
   background: var(--surface);
@@ -311,7 +245,7 @@ html, body {
   overflow: hidden;
   margin-bottom: 28px;
 }
-
+ 
 .checkbox-item {
   display: flex;
   align-items: center;
@@ -323,7 +257,7 @@ html, body {
 }
 .checkbox-item + .checkbox-item { border-top: 1px solid var(--border); }
 .checkbox-item:active { background: var(--surface2); }
-
+ 
 .checkbox-item input[type="checkbox"] {
   appearance: none;
   width: 22px; height: 22px;
@@ -347,18 +281,18 @@ html, body {
   border-left: none;
   transform: rotate(45deg) translateY(-1px);
 }
-
+ 
 .checkbox-name { font-size: 16px; font-weight: 500; }
-
+ 
 .dot {
   width: 8px; height: 8px;
   border-radius: 50%;
   flex-shrink: 0;
 }
-
+ 
 /* In checkbox row, dot goes to the right */
 .checkbox-item .dot { margin-left: auto; }
-
+ 
 .submit-btn {
   width: 100%;
   padding: 17px;
@@ -374,7 +308,7 @@ html, body {
 }
 .submit-btn:active  { opacity: 0.85; transform: scale(0.99); }
 .submit-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-
+ 
 /* ── CHARTS SCREEN ── */
 .stats-grid {
   display: grid;
@@ -382,14 +316,14 @@ html, body {
   gap: 10px;
   margin-bottom: 24px;
 }
-
+ 
 .stat-card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 16px;
 }
-
+ 
 .stat-label {
   font-size: 11px;
   letter-spacing: 0.08em;
@@ -397,7 +331,7 @@ html, body {
   color: var(--text-muted);
   margin-bottom: 8px;
 }
-
+ 
 .stat-value {
   font-family: var(--mono);
   font-size: 22px;
@@ -405,7 +339,7 @@ html, body {
   color: var(--accent);
   letter-spacing: -0.02em;
 }
-
+ 
 .section-label {
   font-size: 11px;
   letter-spacing: 0.1em;
@@ -413,14 +347,14 @@ html, body {
   color: var(--text-muted);
   margin-bottom: 10px;
 }
-
+ 
 .section-hint {
   font-size: 12px;
   color: var(--text-muted);
   margin-top: -6px;
   margin-bottom: 12px;
 }
-
+ 
 /* Paid breakdown */
 .breakdown-card {
   background: var(--surface);
@@ -428,7 +362,7 @@ html, body {
   border-radius: var(--radius);
   overflow: hidden;
 }
-
+ 
 .breakdown-row {
   display: flex;
   align-items: center;
@@ -437,14 +371,14 @@ html, body {
   font-size: 15px;
 }
 .breakdown-row + .breakdown-row { border-top: 1px solid var(--border); }
-
+ 
 .breakdown-amount {
   margin-left: auto;
   font-family: var(--mono);
   font-size: 15px;
   color: var(--accent);
 }
-
+ 
 /* Settlement */
 .settlement-card {
   background: var(--surface);
@@ -452,7 +386,7 @@ html, body {
   border-radius: var(--radius);
   overflow: hidden;
 }
-
+ 
 .settlement-item {
   display: flex;
   align-items: center;
@@ -461,17 +395,17 @@ html, body {
   font-size: 15px;
 }
 .settlement-item + .settlement-item { border-top: 1px solid var(--border); }
-
+ 
 .settlement-text { flex: 1; line-height: 1.4; }
 .settlement-text strong { color: var(--text); }
-
+ 
 .settlement-amount {
   font-family: var(--mono);
   font-size: 16px;
   color: var(--danger);
   white-space: nowrap;
 }
-
+ 
 /* Bar chart */
 .bar-chart {
   background: var(--surface);
@@ -480,7 +414,7 @@ html, body {
   padding: 20px;
   margin-bottom: 24px;
 }
-
+ 
 .bars {
   display: flex;
   align-items: flex-end;
@@ -488,7 +422,7 @@ html, body {
   height: 90px;
   margin-bottom: 8px;
 }
-
+ 
 .bar-col {
   flex: 1;
   display: flex;
@@ -498,7 +432,7 @@ html, body {
   height: 100%;
   justify-content: flex-end;
 }
-
+ 
 .bar {
   width: 100%;
   background: var(--accent);
@@ -506,21 +440,21 @@ html, body {
   min-height: 3px;
   opacity: 0.85;
 }
-
+ 
 .bar-date {
   font-size: 9px;
   color: var(--text-muted);
   text-align: center;
   white-space: nowrap;
 }
-
+ 
 /* Trip history */
 .history-list {
   display: flex;
   flex-direction: column;
   gap: 10px;
 }
-
+ 
 .history-item {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -531,14 +465,14 @@ html, body {
   align-items: flex-start;
   gap: 12px;
 }
-
+ 
 .history-amount {
   font-family: var(--mono);
   font-size: 20px;
   font-weight: 500;
   margin-bottom: 4px;
 }
-
+ 
 .history-payer {
   font-size: 12px;
   color: var(--text-muted);
@@ -547,13 +481,13 @@ html, body {
   gap: 6px;
   margin-bottom: 8px;
 }
-
+ 
 .rider-row {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
 }
-
+ 
 .rider-chip {
   font-size: 11px;
   padding: 3px 8px;
@@ -561,14 +495,14 @@ html, body {
   border: 1px solid;
   color: var(--text-muted);
 }
-
+ 
 .history-meta { text-align: right; flex-shrink: 0; }
-
+ 
 .history-date {
   font-size: 12px;
   color: var(--text-muted);
 }
-
+ 
 .history-note {
   font-size: 12px;
   color: var(--text-muted);
@@ -576,14 +510,14 @@ html, body {
   max-width: 120px;
   text-align: right;
 }
-
+ 
 .empty-state {
   text-align: center;
   color: var(--text-muted);
   font-size: 14px;
   padding: 32px 0;
 }
-
+ 
 /* ── Toast ── */
 .toast {
   position: fixed;
@@ -605,4 +539,330 @@ html, body {
 .toast.show {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
+}
+ 
+/* ── HISTORY MODAL ── */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 200;
+  display: flex;
+  align-items: flex-end;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+}
+ 
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+ 
+.modal-sheet {
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  border-radius: 20px 20px 0 0;
+  max-height: 88dvh;
+  display: flex;
+  flex-direction: column;
+  transform: translateY(100%);
+  transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+}
+ 
+.modal-overlay.open .modal-sheet {
+  transform: translateY(0);
+}
+ 
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 20px 16px;
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+ 
+.modal-title {
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+ 
+.modal-body {
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  -webkit-overflow-scrolling: touch;
+}
+ 
+/* Month cards inside the modal */
+.month-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+ 
+.month-card-header {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+ 
+.month-card-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+ 
+.month-card-total {
+  font-family: var(--mono);
+  font-size: 16px;
+  color: var(--accent);
+}
+ 
+.month-card-body {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+ 
+.month-section-label {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 8px;
+}
+ 
+.month-stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: var(--text-muted);
+}
+ 
+.month-stat-row span:last-child {
+  font-family: var(--mono);
+  color: var(--text);
+  font-size: 13px;
+}
+ 
+.month-drive-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  margin-bottom: 4px;
+}
+ 
+.month-drive-row .drive-count {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--text);
+}
+ 
+.month-drive-row .drive-pct {
+  font-size: 11px;
+  color: var(--text-muted);
+  min-width: 48px;
+  text-align: right;
+}
+ 
+.month-settlement-row {
+  font-size: 13px;
+  color: var(--text-muted);
+  padding: 4px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+ 
+.month-settlement-row + .month-settlement-row {
+  border-top: 1px solid var(--border);
+  margin-top: 4px;
+  padding-top: 8px;
+}
+ 
+.month-settlement-amount {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--danger);
+}
+ 
+.month-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0;
+}
+ 
+.month-trips-badge {
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 2px 10px;
+}
+ 
+/* ── PENDING SETTLEMENT BANNER ── */
+.pending-banner {
+  background: var(--surface);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin-bottom: 20px;
+  animation: fadeUp 0.2s ease;
+}
+ 
+.pending-banner-text {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  line-height: 1.5;
+}
+ 
+.pending-banner-text strong {
+  color: var(--text);
+}
+ 
+.pending-banner-actions {
+  display: flex;
+  gap: 10px;
+}
+ 
+.pending-confirm-btn {
+  flex: 1;
+  padding: 10px;
+  background: var(--accent);
+  border: none;
+  border-radius: 10px;
+  color: #000;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.pending-confirm-btn:active { opacity: 0.8; }
+ 
+.pending-cancel-btn {
+  flex: 1;
+  padding: 10px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text-muted);
+  font-family: var(--font);
+  font-size: 14px;
+  cursor: pointer;
+  transition: border-color 0.15s;
+}
+.pending-cancel-btn:active { border-color: var(--danger); color: var(--danger); }
+ 
+/* ── SETTLE UP ACTION SHEET ── */
+.settle-action-body {
+  padding: 16px 20px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+ 
+.settle-action-hint {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 4px;
+}
+ 
+.settle-action-btn {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: var(--font);
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+.settle-action-btn:active {
+  background: var(--surface2);
+  border-color: var(--accent);
+}
+ 
+.settle-action-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+ 
+.settle-action-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+ 
+.settle-action-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+ 
+/* ── SETTLE UP BUTTON (inline) ── */
+.settle-up-btn {
+  width: 100%;
+  padding: 15px;
+  margin-bottom: 24px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  font-family: var(--font);
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+  letter-spacing: 0.01em;
+}
+.settle-up-btn:active {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+ 
+/* ── DATE ROW ── */
+.date-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin-bottom: 28px;
+}
+ 
+.date-input {
+  background: none;
+  border: none;
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 15px;
+  outline: none;
+  cursor: pointer;
+  color-scheme: dark;
 }
